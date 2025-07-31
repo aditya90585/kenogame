@@ -119,9 +119,9 @@ const Mainboxes = () => {
 
     return (
         <div className={`md:w-[45%] md:h-98  h-70 w-[96%] rounded-2xl flex justify-center  items-center ${((mainselector && autogameSelector == false) || autogamingstate) ? "" : ""}`}>
-            <div className='w-[70%] h-full flex flex-wrap justify-center md:gap-x-3 gap-x-3 items-center'>
+            <div className='w-[70%] h-full flex flex-wrap  md:gap-x-3 gap-x-1 items-center'>
                 {boxes.map((box, index) => {
-                    return <div key={index} onClick={() => handleBoxclick(index)} className={`aspect-square  cursor-pointer w-1/8  rounded-full  flex justify-center items-center
+                    return <div key={index} onClick={() => handleBoxclick(index)} className={`aspect-square md:w-1/8 w-1/7 cursor-pointer rounded-full  flex justify-center items-center
            ${((autogamingstate == false)) ? revealed[index] ? "grad2" : "grad" : "grad"}
           ${((autogamingstate == false) && betState) ? betBoxes[index] ? revealed[index] ? "grad-gold" : "grad-auto" : "grad" : "grad"}
         
