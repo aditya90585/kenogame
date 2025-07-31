@@ -24,15 +24,6 @@ const Mainboxes = () => {
     const bettingstate = useSelector(state => state.bettingstate)
 
 
-
-    let safeClickCountauto = useMemo(() => {
-        return betBoxes.filter(v => v === true).length;
-    }, [betBoxes]);
-
-
-    const safeClickCountlength = useMemo(() => {
-        return revealed.filter(v => v === true).length;
-    }, [revealed]);
     const safeClickCount = useMemo(() => {
         let revealnumarray = []
         revealed.forEach((element, index) => {
@@ -60,56 +51,20 @@ const Mainboxes = () => {
 
     const handleBoxclick = (index) => {
         if (bettingstate == false) {
+             let minestapsound = "/sounds/minestap.mp3"
+                let audio = new Audio(minestapsound)
+                if (soundSelector) {
+                    audio.play()
+                }
             dispatch(togglehowtoplay(false))
             dispatch(toggleMenu(false))
             dispatch(SetbetState(true))
             dispatch(SetbetBoxes())
-
-
             if (autogameSelector == false) {
                 if (safeClickCount > 0) {
                     dispatch(revealedOne(index))
                 } else {
                     dispatch(revealedOne(index))
-                }
-                // if (boxes[index] == "mines") {
-                //     let minestapsound = "/sounds/lose.mp3"
-                //     let audio = new Audio(minestapsound)
-                //     if (soundSelector) {
-                //         audio.play()
-                //     }
-
-                //     // const revealall = Array(5 * 5).fill("true")
-                //     // setRevealed(revealall)
-
-                //     dispatch(revealAll())
-                //     handleFlip(dispatch)
-
-                //     dispatch(togglefooter(false))
-                //     dispatch(togglemain(true))
-                //     dispatch(SetbetState(!betState))
-
-
-                // } else {
-                //     let minestapsound = "/sounds/star-click.mp3"
-                //     let audio = new Audio(minestapsound)
-                //     if (soundSelector) {
-                //         audio.play()
-                //     }
-                // }
-
-            }
-
-            if (footerselector && autogameSelector) {
-                let minestapsound = "/sounds/star-click.mp3"
-                let audio = new Audio(minestapsound)
-                if (soundSelector) {
-                    audio.play()
-                }
-                if (25 - minesCount > safeClickCountauto) {
-                    dispatch(selectAutoOne(index))
-                } else {
-                    dispatch(selectAutoOne(index))
                 }
             }
         }

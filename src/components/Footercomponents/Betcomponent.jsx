@@ -36,34 +36,34 @@ const Betcomponent = () => {
             const payout = parseFloat(betamount) * currentmultiplier;
             if (payout > 0) {
 
-            
-            dispatch(cashOutbetamount(payout))
-            dispatch(togglefooter(false));
-            dispatch(togglemain(true));
-            dispatch(setCashoutNotification(payout))
+
+                dispatch(cashOutbetamount(payout))
+                dispatch(togglefooter(false));
+                dispatch(togglemain(true));
+                dispatch(setCashoutNotification(payout))
 
 
-            let minestapsound = "/sounds/success-alert.mp3"
-            let audio = new Audio(minestapsound)
-            if (soundSelector) {
-                audio.play()
+                let minestapsound = "/sounds/success-alert.mp3"
+                let audio = new Audio(minestapsound)
+                if (soundSelector) {
+                    audio.play()
+                }
+                setTimeout(() => {
+                    dispatch(clearCashoutNotification())
+                }, 2000);
+                // resetGame()
+            } else {
+                let minestapsound = "/sounds/lose.mp3"
+                let audio = new Audio(minestapsound)
+                if (soundSelector) {
+                    audio.play()
+                }
             }
-            setTimeout(() => {
-                dispatch(clearCashoutNotification())
-            }, 2000);
-            // resetGame()
-        }else{
-             let minestapsound = "/sounds/lose.mp3"
-            let audio = new Audio(minestapsound)
-            if (soundSelector) {
-                audio.play()
-            }
-        }
         }
     }
 
 
-   
+
 
     const hits = useMemo(() => {
         let hit = 0
@@ -77,7 +77,7 @@ const Betcomponent = () => {
             index++
         }
         return hit
-    }, [revealed, betBoxes,betBoxesref.current]);
+    }, [revealed, betBoxes, betBoxesref.current]);
 
     const hitsref = useRef(hits)
 
@@ -112,9 +112,9 @@ const Betcomponent = () => {
     const bet = (e) => {
         dispatch(togglehowtoplay(false))
         dispatch(toggleMenu(false))
-       
+
         if (keyboard == false && safeClickCount > 0 && Number(totalAmt) > 0 && Number(betamount) > 0 && Number(betamount) <= 100 && autogamingstate == false && bettingstate == false) {
-             dispatch(setBettingstate(true))
+            dispatch(setBettingstate(true))
             dispatch(SetbetBoxes())
             let minestapsound = "/sounds/bet-click.mp3"
             let audio = new Audio(minestapsound)
@@ -137,7 +137,6 @@ const Betcomponent = () => {
                     }
                     index++
                 }
-
             }
             let selectedBetBoxes = 0
 
@@ -155,18 +154,10 @@ const Betcomponent = () => {
                 }, 100);
             }
             selectrandomBoxes()
-
             dispatch(SetbetState(true))
             dispatch(betAmt(Number(betamount)))
-            // dispatch(togglemain(false))
-            // setDisablefooter(true)
-            // dispatch(togglefooter(true))
-            // setTogglefixedamt(false)
-            // dispatch(setcashOutamount(multiplier()))
-            // dispatch(SetbetState(!betState))
         }
     }
-
     return (
         <div onClick={bet} className={` ${((safeClickCount > 0) && betState && !autogamingstate) ? "" : "disable-div"} flex cursor-pointer border-2 border-black inset-shadow-[0.4px_0.6px_0px_#94dcf7] shadow-[1px_1px_8px_rgb(0,0,0)] items-center justify-between w-9/10 bg-radial-[at_50%_60%] from-[#5CA003] to-[#327A00] to-60% h-full rounded-2xl active:translate-x-0.2 active:translate-y-0.5  transition-transform duration-150`}><CiPlay1 className='text-white font-bold text-3xl ml-5 ' />
             <span className='text-white font-bold text-xl w-8/10  mr-10 flex justify-center'>

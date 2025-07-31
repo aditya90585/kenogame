@@ -56,6 +56,11 @@ const Main = () => {
 
   const selectRandom = async () => {
     if (bettingstate == false) {
+      let minestapsound = "/sounds/minestap.mp3"
+      let audio = new Audio(minestapsound)
+      if (soundSelector) {
+        audio.play()
+      }
       dispatch(togglehowtoplay(false))
       dispatch(toggleMenu(false))
       dispatch(revealedFalse())
@@ -78,44 +83,6 @@ const Main = () => {
             index++
           }
         }
-
-
-
-        // if (boxes[random] == "mines") {
-        //   let minestapsound = "/sounds/lose.mp3"
-        //   let audio = new Audio(minestapsound)
-        //   if (soundSelector) {
-        //     audio.play()
-        //   }
-        //   dispatch(revealAll())
-        //   handleFlip(dispatch)
-        //   dispatch(togglefooter(false))
-        //   dispatch(togglemain(true))
-        //   dispatch(SetbetState(!betState))
-        // } else {
-        //   let minestapsound = "/sounds/star-click.mp3"
-        //   let audio = new Audio(minestapsound)
-        //   if (soundSelector) {
-        //     audio.play()
-        //   }
-        // }
-
-      }
-      if (footerselector && autogameSelector) {
-        const random = Math.floor(Math.random() * 25)
-        if (selectAutoBoxes[random] == false) {
-          let minestapsound = "/sounds/star-click.mp3"
-          let audio = new Audio(minestapsound)
-          if (soundSelector) {
-            audio.play()
-          }
-          if (25 - minesCount > safeClickCountauto) {
-            dispatch(selectAutoOne(random))
-          }
-        }
-        else {
-          selectRandom()
-        }
       }
     }
   }
@@ -128,21 +95,13 @@ const Main = () => {
     return revealed.filter(v => v === true);
   }, [revealed]);
 
-  const autoGameFunction = () => {
-
-    if (!betState) {
-      resetGame()
-      dispatch(toggleAutoGame(!autogameSelector))
-      dispatch(togglefooter(!footerselector))
-      dispatch(togglemain(!mainselector))
-      dispatch(SetselectAutoBoxes())
-      dispatch(SetautorevealState(false))
-    } else {
-
-    }
-  }
   const clearGame = () => {
     if (bettingstate == false) {
+       let minestapsound = "/sounds/soft-click.mp3"
+      let audio = new Audio(minestapsound)
+      if (soundSelector) {
+        audio.play()
+      }
       resetGame()
     }
 

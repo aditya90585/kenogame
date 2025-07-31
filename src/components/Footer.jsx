@@ -9,7 +9,6 @@ import { CiPlay1 } from "react-icons/ci";
 import { MdOutlineAutorenew } from "react-icons/md";
 import { RxCross1 } from "react-icons/rx";
 import Firstfoot from './Footercomponents/Firstfoot.jsx'
-import Cashout from './Footercomponents/Cashout.jsx'
 import Betcomponent from './Footercomponents/Betcomponent.jsx'
 
 
@@ -86,7 +85,6 @@ const Footer = () => {
     }, [hits])
 
 
-
     const cashOut = () => {
         dispatch(togglehowtoplay(false))
         dispatch(toggleMenu(false))
@@ -119,23 +117,7 @@ const Footer = () => {
         }
     }
 
-    const resetGame = () => {
-        const newBoxes = Array(36).fill("unsafe")
-        let index = 0
-        while (index < 10) {
-            const random = Math.floor(Math.random() * newBoxes.length)
-            if (newBoxes[random] !== "safe") {
-                newBoxes[random] = "safe"
-                index++
-            }
-        }
 
-        dispatch(togglemain(true))
-        dispatch(boxesSet(newBoxes))
-        dispatch(revealedFalse())
-        dispatch(SetbetBoxes())
-
-    }
 
     useEffect(() => {
         setDisablefooter(footerselector)

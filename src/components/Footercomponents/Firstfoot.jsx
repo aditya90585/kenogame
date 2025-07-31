@@ -20,8 +20,8 @@ const Firstfoot = () => {
     const [fixedBetArray, setFixedBetArray] = useState([0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 1.20, 2.00, 4.00, 10.00, 20.00, 50.00, 100.00])
     const [togglefixedamt, setTogglefixedamt] = useState(false)
     const dispatch = useDispatch()
-     const  bettingstate = useSelector(state => state.bettingstate)
-    
+    const bettingstate = useSelector(state => state.bettingstate)
+
 
 
     const changevalue = (num) => {
@@ -114,20 +114,13 @@ const Firstfoot = () => {
         let newbetamount
         fixedBetArray.forEach((e, index) => {
             if (betamount >= e) {
-
-
                 if (index > 0) {
                     newbetamount = fixedBetArray[index - 1].toFixed(2)
-
                 }
-
                 if (newbetamount >= 0.10) {
-
                     dispatch(addfixBet(newbetamount))
                 }
-
             }
-
         })
     }
 
